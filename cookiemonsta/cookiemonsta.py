@@ -76,7 +76,7 @@ if __name__ == "__main__":
     current_time = get_current_time()
 
     # Decrypt all cookie values in database
-    for host_key, value, name, expires_utc, encrypted_value in cursor.fetchall():
+    for host_key, name, value, expires_utc, encrypted_value in cursor.fetchall():
         if expires_utc - current_time > 0:	# Fresh cookies only
             if encrypted_value[:3] == b'v10':	# v10 signifies cookie was encrypted with DPAPI
                 if DOMAIN_FILTER and DOMAIN_FILTER in host_key.decode():  # Filter by domain
